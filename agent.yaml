@@ -1,0 +1,40 @@
+id: 6a8447bc8cb8a6ca4ca07116
+name: PRD Guardian
+description: Crafts structured PRD documents by analyzing user input, extracting key
+  data, and identifying potential gaps or risks in product proposals.
+model:
+  provider: OpenAI
+  name: gpt-5.4-mini
+  temperature: 0.7
+  top_p: 0.9
+features:
+- type: MEMORY
+  priority: 0
+  config:
+    provider: cognis
+    lyzr_memory:
+      provider_type: cognis
+      params:
+        cross_session: false
+- type: RAI
+  priority: 1
+  config:
+    endpoint: https://rai-prod.studio.lyzr.aiv1/rai/inference
+    policy_id: 6a8454c479e44425977325ce
+    policy_name: PII Protection
+- type: KNOWLEDGE_BASE
+  priority: 0
+  config:
+    lyzr_rag:
+      base_url: https://rag-prod.studio.lyzr.ai
+      rag_id: 6a844f0109128d7346e00a63
+      rag_name: hippa_rules
+      params:
+        top_k: 10
+        retrieval_type: basic
+        score_threshold: 0
+    agentic_rag: []
+tools: []
+response_format:
+  type: text
+max_iterations: 25
